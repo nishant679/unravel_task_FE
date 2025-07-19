@@ -47,20 +47,22 @@ const VideoCard = ({ videoUrl, data }) => {
   return (
     <div>
       <div className="relative w-full h-[600px] overflow-hidden rounded-xl">
-        <video
-          ref={videoRef}
-          src={videoUrl}
-          className={`absolute top-0 left-0 w-full h-full object-cover ${mediaLoaded ? "" : "hidden"}`}
-          loop
-          muted
-          playsInline
-          preload="metadata"
-          onLoadedData={() => setMediaLoaded(true)}
-          onError={(e) => {
+      <video
+        ref={videoRef}
+        src={videoUrl}
+        className={`absolute top-0 left-0 w-full h-full object-cover ${mediaLoaded ? '' : 'hidden'}`}
+        loop
+        muted
+        playsInline
+        autoPlay  
+        preload="auto" 
+        onLoadedData={() => setMediaLoaded(true)}
+        onError={(e) => {
             console.error("Video failed to load:", e);
-            setMediaLoaded(true); // fallback to render variants anyway
-          }}
+            setMediaLoaded(true);
+        }}
         />
+
         {!mediaLoaded && (
           <div className="w-full h-full flex items-center justify-center bg-gray-200">
             <span className="text-gray-500">Loading video...</span>

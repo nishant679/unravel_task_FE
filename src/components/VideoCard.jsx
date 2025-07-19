@@ -1,9 +1,7 @@
 import { useState, useEffect, useRef } from "react";
-// import RoomInfoCard from "./RoomInfoCard";
-import { data } from "autoprefixer";
 import ShowVariants from "./ShowVariants";
 
-const VideoCard = ({ videoUrl, title = "Video Title", description = "Video description goes here." , data}) => {
+const VideoCard = ({ videoUrl, data}) => {
   const [mediaLoaded, setMediaLoaded] = useState(false);
   const [isInViewport, setIsInViewport] = useState(false);
   const videoRef = useRef(null);
@@ -42,7 +40,7 @@ const VideoCard = ({ videoUrl, title = "Video Title", description = "Video descr
 
   return (
     <>
-    <div className="relative w-full h-[800px] overflow-hidden rounded-xl">
+    <div className="relative w-full h-[600px] overflow-hidden rounded-xl">
       {/* Video */}
       <video
         ref={videoRef}
@@ -58,15 +56,7 @@ const VideoCard = ({ videoUrl, title = "Video Title", description = "Video descr
           setMediaLoaded(true);
         }}
       />
-
-      {/* Overlay (always on top) */}
-      <div className="absolute bottom-0 left-0 w-full z-10 bg-gradient-to-t from-black/80 to-transparent text-white p-4">
-        
     </div>
-    
-
-    </div>
-    {/* <RoomInfoCard data={data} /> */}
     <ShowVariants variants={data.variants || []} name={data.name}/>
     
     </>

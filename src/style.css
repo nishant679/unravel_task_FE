@@ -10,24 +10,15 @@
   align-items: center;
 }
 
-@media (max-width: 768px) {
-  .main-app-container {
-    /* padding: 0.5rem; */
-  }
-}
-
 body { 
     font-family: 'Segoe UI', sans-serif; 
-    padding: 10px; 
-    background: #f0f2f5; 
+    max-height: 100vh;
 }
 
 .app-container {
-     max-width: 600px; 
+     max-width: 600px;
      height: 96vh;  
      margin: auto;  
-     background: white; 
-     box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
     }
 
 h1 { 
@@ -58,42 +49,27 @@ h1 {
 }
 
 .card-list-container { 
-    border: 1px solid #e0e0e0; 
-    background: #fcfcfc; 
-    min-height: 90%; 
+    min-height: 96%; 
 }
 
 .card { 
     background: white; 
-    border: 1px solid #ddd; 
-    border-radius: 8px; 
-    padding: 18px; 
-    margin: 10px 15px; 
+    margin: 10px 0px; 
 }
 
 .card:hover { 
     transform: translateY(-3px); 
     box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
 }
-
-.card h3 { 
-    margin: 0 0 8px; 
-    color: #007bff; 
-}
-
-.card p { 
-    margin: 4px 0; 
-}
+s
 
 .loading-indicator, .initial-loading, .end-of-list, .error-message, .no-data-message {
-    text-align: center; 
-    padding: 15px; 
-    color: #888; 
+    text-align: center;
     font-style: italic;
 }
 
 .loading-indicator { 
-    color: #007bff; 
+    color: #0315d3; 
     font-weight: bold; 
 }
 
@@ -105,10 +81,14 @@ h1 {
 @media (max-width: 768px) {
     .app-container {
     max-width: 100%;
-    padding: 10px;
+    /* padding: 10px; */
     box-shadow: none;
     }
-    .card {
-    margin: 10px 0;
+    .app-container{
+        width: 100%;
+        margin: 0;
+    }
+    .main-app-container{
+        max-height: 96vh;
     }
 }

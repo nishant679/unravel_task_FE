@@ -92,7 +92,6 @@ Our goal is to **minimize re-renders**, **lazy-load heavy resources**, and **fet
 
 ### 🔧 Prerequisites
 
-- Node.js ≥ 16
 - npm or yarn
 
 ### 🚀 Setup Instructions

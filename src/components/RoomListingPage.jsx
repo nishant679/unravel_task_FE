@@ -1,10 +1,16 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import RoomCard from './RoomCard';
 import useDataFetcher from '../hooks/useDataFetcher';
 
-
-
 const VISIBLE_CARDS_COUNT = 5;
+
+const PaginationInfo = React.memo(({ loaded, pending }) => (
+    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '1rem', border: '1px solid #d3d3d3', padding: '10px 8px' }}>
+      <label>Pagination Information:</label>
+      <label>Loaded : {loaded}</label>
+      <label>Pending : {pending}</label>
+    </div>
+  ));
 
 export default function RoomListingApp() {
   const pageSize = 10;
@@ -16,10 +22,9 @@ export default function RoomListingApp() {
     setMaxStartIndexReached(prev => Math.max(prev, newIndex));
   }, []);
 
-  const loadedCount = data.length;
-  const visitedCount = Math.min(maxStartIndexReached + VISIBLE_CARDS_COUNT, loadedCount);
-  const pendingCount = totalAvailableData - loadedCount;
-
+  const loadedCount = useMemo(() => data.length, [data]);
+  const visitedCount = useMemo(() => Math.min(maxStartIndexReached + VISIBLE_CARDS_COUNT, loadedCount), [maxStartIndexReached, loadedCount]);
+  const pendingCount = useMemo(() => totalAvailableData - loadedCount, [totalAvailableData, loadedCount]);
 
   return (
     <div  className="app-container card-list-container" >
@@ -35,13 +40,7 @@ export default function RoomListingApp() {
       />
 
       <div>
-        
-        <div style={{display:'flex', justifyContent:'space-between', fontSize:'1rem', border:'1px solid #d3d3d3', padding:'10px 8px'}}>
-          <label className='mb-2'>Pagination Information:</label>
-          <label>Loaded : {loadedCount}</label>
-          {/* <label>Visited : {visitedCount}</label> */}
-          <label>Pending : {pendingCount}</label>
-        </div>
+        <PaginationInfo loaded={loadedCount} pending={pendingCount} />
       </div>
     </div>
   );

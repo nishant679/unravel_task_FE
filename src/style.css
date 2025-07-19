@@ -1,0 +1,114 @@
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.main-app-container {
+  font-family: 'Inter', sans-serif;
+  max-height: 100vh;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .main-app-container {
+    /* padding: 0.5rem; */
+  }
+}
+
+body { 
+    font-family: 'Segoe UI', sans-serif; 
+    padding: 10px; 
+    background: #f0f2f5; 
+}
+
+.app-container {
+     max-width: 600px; 
+     height: 96vh;  
+     margin: auto;  
+     background: white; 
+     box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
+    }
+
+h1 { 
+    text-align: center; 
+    color: #333; 
+}
+
+.header-tabs { 
+    display: flex; 
+    justify-content: space-around; 
+    margin-bottom: 10px; 
+    background: #e9ecef; 
+    overflow: hidden; 
+}
+
+.tab-button { 
+    flex: 1; 
+    padding: 12px; 
+    font-weight: bold; 
+    border: none; 
+    background: transparent; 
+    cursor: pointer; 
+}
+
+.tab-button.active { 
+    background: #007bff; 
+    color: white; 
+}
+
+.card-list-container { 
+    border: 1px solid #e0e0e0; 
+    background: #fcfcfc; 
+    min-height: 90%; 
+}
+
+.card { 
+    background: white; 
+    border: 1px solid #ddd; 
+    border-radius: 8px; 
+    padding: 18px; 
+    margin: 10px 15px; 
+}
+
+.card:hover { 
+    transform: translateY(-3px); 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
+}
+
+.card h3 { 
+    margin: 0 0 8px; 
+    color: #007bff; 
+}
+
+.card p { 
+    margin: 4px 0; 
+}
+
+.loading-indicator, .initial-loading, .end-of-list, .error-message, .no-data-message {
+    text-align: center; 
+    padding: 15px; 
+    color: #888; 
+    font-style: italic;
+}
+
+.loading-indicator { 
+    color: #007bff; 
+    font-weight: bold; 
+}
+
+.error-message { 
+    color: #dc3545; 
+}
+
+/* Responsive: Full width on small screens */
+@media (max-width: 768px) {
+    .app-container {
+    max-width: 100%;
+    padding: 10px;
+    box-shadow: none;
+    }
+    .card {
+    margin: 10px 0;
+    }
+}

@@ -95,4 +95,5 @@ const RoomCard = ({ data, onLoadMore, isLoading, hasMore, error, pageSize, onSta
   );
 };
 
-export default RoomCard;
+// export default RoomCard;
+export default React.memo(RoomCard);

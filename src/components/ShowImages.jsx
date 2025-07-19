@@ -1,24 +1,39 @@
-import React, { useState, useEffect } from "react";
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  memo
+} from "react";
 
-const ShowImages = React.memo(({ imgUrl = [] }) => {
+const ShowImages = memo(({ imgUrl = [] }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
+  // Auto slide
   useEffect(() => {
+    if (isPaused || imgUrl.length <= 1) return;
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % imgUrl.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, [imgUrl]);
+  }, [imgUrl, isPaused]);
 
-  const nextImage = () => {
+  // Clamp index when imgUrl changes
+  useEffect(() => {
+    if (currentIndex >= imgUrl.length) {
+      setCurrentIndex(0);
+    }
+  }, [imgUrl, currentIndex]);
+
+  const nextImage = useCallback(() => {
     setCurrentIndex((prev) => (prev + 1) % imgUrl.length);
-  };
+  }, [imgUrl.length]);
 
-  const prevImage = () => {
+  const prevImage = useCallback(() => {
     setCurrentIndex((prev) =>
       prev === 0 ? imgUrl.length - 1 : prev - 1
     );
-  };
+  }, [imgUrl.length]);
 
   if (!Array.isArray(imgUrl) || imgUrl.length === 0) {
     return (
@@ -29,8 +44,11 @@ const ShowImages = React.memo(({ imgUrl = [] }) => {
   }
 
   return (
-    <div className="relative w-full h-[500px] overflow-hidden rounded-xl">
-      {/* Image */}
+    <div
+      className="relative w-full h-[500px] overflow-hidden rounded-xl"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
       <img
         src={imgUrl[currentIndex]}
         alt={`Image ${currentIndex + 1}`}
@@ -43,9 +61,8 @@ const ShowImages = React.memo(({ imgUrl = [] }) => {
         }}
       />
 
-      {/* Controls (bottom center) */}
+      {/* Controls */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-4 bg-black/60 px-4 py-2 rounded-full shadow-lg">
-        {/* Prev Button */}
         <button
           onClick={prevImage}
           className="text-white text-2xl px-2 hover:bg-white/20 rounded-full"
@@ -53,7 +70,6 @@ const ShowImages = React.memo(({ imgUrl = [] }) => {
           ‹
         </button>
 
-        {/* Dots */}
         <div className="flex gap-2">
           {imgUrl.map((_, idx) => (
             <span
@@ -66,7 +82,6 @@ const ShowImages = React.memo(({ imgUrl = [] }) => {
           ))}
         </div>
 
-        {/* Next Button */}
         <button
           onClick={nextImage}
           className="text-white text-2xl px-2 hover:bg-white/20 rounded-full"
